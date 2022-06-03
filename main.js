@@ -25,8 +25,8 @@ async function fetchAccountData() {
         formatedBalance = ethers.utils.formatEther(balance.sub(formatedBalance));
         
         //updateHTMLElements network/balances/button
-        document.getElementById("selected-account").innerHTML = `${account}`;
-        document.getElementById("account-balance").innerHTML = ` - ${formatedBalance} ${chainIdMap[ethereum.networkVersion].symbol}`;
+        document.getElementById("selected-account").innerHTML = `(${account})`;
+        document.getElementById("account-balance").innerHTML = `${formatedBalance} ${chainIdMap[ethereum.networkVersion].symbol}`;
         document.getElementById("network-name").innerHTML = `${chainIdMap[ethereum.networkVersion].name}`;
         document.getElementById("btn-connect").style.display = "none";
         document.getElementById("btn-disconnect").style.display = "block";
