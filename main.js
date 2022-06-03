@@ -1,7 +1,3 @@
-let provider;
-let signer;
-let account;
-
 document.getElementById("btn-connect").addEventListener("click", fetchAccountData)
 document.getElementById("btn-disconnect").addEventListener("click", onDisconnect)
 
@@ -18,12 +14,21 @@ function init() {
         };
         }
 };
-    
-async function refreshAccountData() {}
 
 async function fetchAccountData() {
     try {
-        account = await ethereum.request({method: "eth_requestAccounts"});
+        const provider = new ethers.providers.Web3Provider(ethereum);
+        let account = await provider.send("eth_requestAccounts").then( accounts => {
+          return accounts[0];
+        });
+        let balance = await provider.getBalance(account);
+        let formatedBalance = ethers.BigNumber.from(balance);
+        formatedBalance = balance.mod(1e14);
+        formatedBalance = ethers.utils.formatEther(balance.sub(formatedBalance));
+        //updateHTMLElements
+        document.getElementById("selected-account").innerHTML = `${account}`;
+        document.getElementById("account-balance").innerHTML = ` - ${formatedBalance} ${chainIdMap[ethereum.networkVersion].symbol}`;
+        document.getElementById("network-name").innerHTML = `${chainIdMap[ethereum.networkVersion].name}`;
         document.getElementById("btn-connect").style.display = "none";
         document.getElementById("btn-disconnect").style.display = "block";
         localStorage.setItem("CACHED_PROVIDER", "TRUE");
@@ -36,7 +41,6 @@ async function fetchAccountData() {
         fetchAccountData();
         
       } else {
-        console.log("no account");
         localStorage.removeItem("CACHED_PROVIDER");
         document.getElementById("btn-disconnect").style.display = "none";
         document.getElementById("btn-connect").style.display = "block";
