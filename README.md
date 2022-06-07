@@ -4,5 +4,6 @@ Uses ethers.js, Bootstap, MetaMask.
 
 Connects to MetaMask and reacts to account/chain state dynamically.
 
-MIT License
+MIT License Free to use
+
 Developed by sokoli.eth
