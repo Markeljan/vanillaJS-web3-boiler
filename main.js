@@ -1,6 +1,3 @@
-document.getElementById("btn-connect").addEventListener("click", fetchAccountData)
-document.getElementById("btn-disconnect").addEventListener("click", onDisconnect)
-
 ////////////////////////////
 ///////Run Code Here////////
 ///////////////////////////
@@ -8,7 +5,11 @@ async function main() {
   //contract readOnlyContract = new ethers(/*Contract Address*/, /*Contract ABI*/, provider);
   //contract writeContract = new ethers(/*Contract Address*/, /*Contract ABI*/, signer);
   //see ethers.js docs for how to call contract functions.
+  
+
 }
+
+
 
 function init() {
     try {
@@ -21,6 +22,8 @@ function init() {
             window.open("http://metamask.io", "_blank");
             };
         }
+document.getElementById("btn-connect").addEventListener("click", fetchAccountData)
+document.getElementById("btn-disconnect").addEventListener("click", onDisconnect)
 };
 
 async function fetchAccountData() {
